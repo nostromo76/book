@@ -34,3 +34,15 @@ label {
   margin-left:15%;
   position: relative;
 }
+.book {
+	font-family: Arial, sans-serif;
+	font-size: 18px;
+	font-style: italic;
+	text-align: center;
+	padding: 20px;
+	border-bottom: 1px solid #ccc;
+  }
+  
+  .book p {
+	margin-bottom: 20px;
+  }
