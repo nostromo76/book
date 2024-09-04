@@ -30,15 +30,22 @@
 
 
 	</li>
+	@if (Route::has('login'))
+
+	@auth
 	<li>
-		<a href="{{ route('register') }}" class = "btn btn-success">Register</a>
 
-
-	</li>
-<li>
-    <a href="{{ route('login') }}" class="btn btn-primary">Login</a>
+		<a href="{{ url('/dashboard') }}" class = "btn btn-success">{{ Auth::user()->name }}</a>
 </li>
 
+@else
+
+<li>
+	<a href ="{{ route('register') }}" class="btn btn-success">Register</a>
+    <a href="{{ route('login') }}" class="btn btn-primary">Login</a>
+</li>
+@endauth
+@endif
 
 
 </ul>
@@ -57,7 +64,7 @@
  <img src="book2.png" height="500px" width="100%px">
 
  <p>There's something special about finding a quiet spot to curl up with a good book. Whether it's a cozy coffee shop, a peaceful library, or even a secluded park, there's something about being surrounded by nature and the sound of pages turning that just makes reading feel more enjoyable. And with the world getting busier and more noisy, it's nice to have a place where you can escape and immerse yourself in a good story. So grab a cup of tea, find your favorite spot, and get lost in a great book.</p>
- 
+
  <img src="book3.png" height="500px" width="100%px">
 
 </div>
