@@ -10,7 +10,8 @@ class HomeController extends Controller
 {
     public function index(){
 
-        return view('home.index');
+        $post=Post::All();
+        return view('home.index',compact('post'));
     }
 
   public function upload(Request $request){
