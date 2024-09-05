@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
+
 class HomeController extends Controller
 {
     public function index(){
@@ -17,6 +18,12 @@ class HomeController extends Controller
     $data= new Post;
     $data->username=Auth::user()->name;
     $data->description=$request->description;
+    //Slika insert
+    $image=$request->image;
+    $imageName=time().'.'.$image->getClientOriginalExtension();
+    $request->image->move('post',$imageName);
+    $data->image=$imageName;
+    //kraj slika
     $data->save();
     return redirect()->back();
 
