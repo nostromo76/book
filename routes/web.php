@@ -16,6 +16,10 @@ Route::get('/view_post',[HomeController::class,'view_post']);
 
 Route::get('/delete_post/{id}',[HomeController::class,'delete_post']);
 
+Route::post('/update_post/{id}',[HomeController::class,'update_post']);
+
+Route::post('/confirm_update/{id}', [HomeController::class, 'confirm_update']);
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),

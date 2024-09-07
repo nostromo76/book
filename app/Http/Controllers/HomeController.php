@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
 
+
+
+
+
 class HomeController extends Controller
 {
     public function index(){
@@ -51,4 +55,34 @@ class HomeController extends Controller
       $data->delete();
       return redirect()->back();
     }
+
+
+    public function update_post($id){
+
+      $data=Post::find($id);
+
+      return view('updatepost',compact('data'));
+    }
+
+    public function confirm_update(Request $request, $id){
+
+      $post=Post::find($id);
+      $post->description= $request->description;
+
+      $image=$request->image;
+          if($image){
+            $imageName=time().'.'.$image->getClientOriginalExtension();
+            $request->image->move('post',$imageName);
+            $post->image=$imageName;
+
+  }
+
+  $post->save();
+  return redirect()->back();
+  
+  }
+
 }
+  
+
+

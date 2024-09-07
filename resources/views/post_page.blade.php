@@ -87,12 +87,17 @@ td img {
             </tr>
             @foreach($post as $post)
             <tr>
-                    <th>{{$post->description}}</th>
-                    <th>
+                    <td>{{$post->description}}</td>
+                    <td>
                         <img src="post/{{$post->image}}">
-                   </th>
-                    <th><a href=""class="btn btn-primary"></a><-Update</th>
-                    <th><a href="{{url('delete_post',$post->id)}}" class="btn btn-danger"></a><-Delete</th>
+                   </td>
+                    <td><a href="{{url('update_post',$post->id)}}"class="btn btn-primary"></a><-Update</td>
+
+
+                    <td>
+                        <a onclick = "return confirm('are you sure to delete?')" href=
+                    "{{url('delete_post',$post->id)}}" class="btn btn-danger"></a><-Delete</td>
+
 
             </tr>
                 @endforeach
