@@ -14,34 +14,30 @@
  <div>
  
                
-                
-        <form action="{{url('confirm_update',$data->id)}}" method="POST"enctype="multipart/form-data">
-        <div>
+   <form action="{{ route('confirm_update', $data->id) }}" method="POST" enctype="multipart/form-data">
+    @csrf
+    <div>
         <label>Post Description</label>
-        <input type="text"name ="description" value="{{$data->description}}">
-        @csrf
-        </div>
+        <input type="text" name="description" value="{{ $data->description }}" required>
+    </div>
 
-        <br> <br>
-        <div>
-            <label>Current  image</label>
-            <img src="/post/{{$data->image}}"height="300px"width="300px">
-        </div>
+    <br><br>
 
-        <div>
-            <label>Change image</label>
-            <input type="file" name="image">
-        </div>
+    <div>
+        <label>Current Image</label>
+        <img src="{{ asset('post/' . $data->image) }}" height="300px" width="300px" alt="Current Image">
+    </div>
 
-        <br>
+    <div>
+        <label>Change Image</label>
+        <input type="file" name="image">
+    </div>
 
-        <input type="submit"value="Update Post" style="background-color: green;">
+    <br>
 
+    <input type="submit" value="Update Post" style="background-color: green;">
+</form>
 
-
-
-
-        </form>
         
 
 

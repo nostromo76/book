@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use Illuminate\Support\Facades\Storage;
 
 //Route::get('/', function () {
   //  return view('home.index');
@@ -16,7 +17,8 @@ Route::get('/view_post',[HomeController::class,'view_post']);
 
 Route::get('/delete_post/{id}',[HomeController::class,'delete_post']);
 
-Route::post('/update_post/{id}',[HomeController::class,'update_post']);
+Route::post('update_post/{id}', [HomeController::class, 'update'])->name('update.post');
+
 
 Route::post('/confirm_update/{id}', [HomeController::class, 'confirm_update']);
 

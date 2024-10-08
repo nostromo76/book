@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Storage;
 
 
 
@@ -57,32 +57,34 @@ class HomeController extends Controller
     }
 
 
-    public function update_post($id){
+public function confirm_update(Request $request, $id) {
+    // Validate input
+    $request->validate([
+        'description' => 'required|string',
+        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Optional image validation
+    ]);
 
-      $data=Post::find($id);
+    $post = Post::findOrFail($id); // Use findOrFail to throw an exception if not found
+    $post->description = $request->description;
 
-      return view('updatepost',compact('data'));
+    if ($request->hasFile('image')) {
+        // Generate a unique filename
+        $imageName = time() . '.' . $request->image->getClientOriginalExtension();
+
+        // Move the image to the 'public/post' directory
+        $request->image->move(public_path('post'), $imageName);
+
+        // Store the filename in the database
+        $post->image = $imageName;
     }
 
-    public function confirm_update(Request $request, $id){
+    $post->save();
 
-      $post=Post::find($id);
-      $post->description= $request->description;
-
-      $image=$request->image;
-          if($image){
-            $imageName=time().'.'.$image->getClientOriginalExtension();
-            $request->image->move('post',$imageName);
-            $post->image=$imageName;
-
-  }
-
-  $post->save();
-  return redirect()->back();
-  
-  }
-
+    return redirect()->back()->with('success', 'Post updated successfully!');
 }
   
+  }
+
+
 
 
